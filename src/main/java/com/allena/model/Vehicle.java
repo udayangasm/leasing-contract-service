@@ -1,15 +1,13 @@
 package com.allena.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "vehicle")
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String brand;
@@ -18,6 +16,16 @@ public class Vehicle {
     private String vehicleIdentificationNumber;
     private Double price;
 
+    @OneToOne(mappedBy = "vehicle")
+    private LeasingContract leasingContract;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getBrand() {
         return brand;
@@ -57,5 +65,13 @@ public class Vehicle {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public LeasingContract getLeasingContract() {
+        return leasingContract;
+    }
+
+    public void setLeasingContract(LeasingContract leasingContract) {
+        this.leasingContract = leasingContract;
     }
 }

@@ -1,19 +1,20 @@
-
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/leasing?useSSL=false&serverTimezone=UTC&llowPublicKeyRetrieval=true
     username: user
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        format_sql: true
-        use_sql_comments: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
+  flyway:
+    url: jdbc:mysql://localhost:3306/leasing?useSSL=false&serverTimezone=UTC&llowPublicKeyRetrieval=true
+    user: user
+    password: password
+    baseline-on-migrate: true
+    enabled: true
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    locations:
+      - classpath:db/migration
+    sql-migration-suffixes: .sql
+
+server:
+  port: 8000

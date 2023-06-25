@@ -2,43 +2,25 @@ package com.allena.service;
 
 import com.allena.model.LeasingContract;
 import com.allena.repository.LeasingContractRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.allena.response.LeasingContractDto;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LeasingContractService {
 
-    @Autowired
-    private LeasingContractRepository leasingContractRepository;
+    private final LeasingContractRepository leasingContractRepository;
 
-
-    public List<LeasingContract> getAllLeasingContracts(){
-        return leasingContractRepository.findAll();
+    public LeasingContractService(LeasingContractRepository leasingContractRepository) {
+        this.leasingContractRepository = leasingContractRepository;
     }
 
-
-    public LeasingContract getLeasingContractById(Long id){
-        return leasingContractRepository.findById(id).orElse(null);
+    public List<LeasingContractDto> getAllLeasingContracts() {
+        return leasingContractRepository.findAll().stream().map(LeasingContractDto::new).collect(Collectors.toList());
     }
 
-
-    public LeasingContract createLeasingContract(LeasingContract leasingContract){
-        return leasingContractRepository.save(leasingContract);
+    public LeasingContractDto createOrUpdateLeasingContract(LeasingContract leasingContract) {
+        return new LeasingContractDto(leasingContractRepository.save(leasingContract));
     }
-
-
-    public LeasingContract updateLeasingContract(Long id, LeasingContract leasingContract){
-        LeasingContract existingLeasingContract = leasingContractRepository.findById(id).orElse(null);
-        existingLeasingContract.setContractNumber(leasingContract.getContractNumber());
-        return leasingContractRepository.save(existingLeasingContract);
-    }
-
-
-    public void deleteLeasingContract(Long id){
-        leasingContractRepository.deleteById(id);
-    }
-
-
 }
