@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LeasingContractRepository extends JpaRepository<LeasingContract, Long> {
+    boolean existsByVehicleId(Long id);
+    boolean existsByContractNumber(String contractNumber);
 }

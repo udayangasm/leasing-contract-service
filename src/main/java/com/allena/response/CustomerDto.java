@@ -2,10 +2,9 @@ package com.allena.response;
 
 import com.allena.model.Customer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Data;
+
 import java.time.LocalDate;
 
-@Data
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CustomerDto {
 
@@ -20,5 +19,37 @@ public class CustomerDto {
         this.firstName = customer.getFirstName();
         this.lastName = customer.getLastName();
         this.dateOfBirth = customer.getDateOfBirth();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

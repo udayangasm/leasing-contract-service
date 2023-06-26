@@ -4,6 +4,7 @@ import com.allena.model.Vehicle;
 import com.allena.repository.VehicleRepository;
 import com.allena.response.VehicleDto;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
